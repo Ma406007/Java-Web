@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #container {
+      display: flex;
+      /* justify-content: space-between; */ /* 先两边贴边，再平分剩余空间 */
+      /* justify-content: flex-start;*/ /* 从头开始排列  */
+      /* justify-content: flex-end; */ /* 从尾开始排列 */
+      /* justify-content: center; */ /* 居中排列 */
+      /* justify-content: space-around; */ /* 两边留白，中间平分，平分剩余空间 */
+      flex-direction: row;
+      justify-content: space-between;
+      background-color: #aeea6a;
+      width: 400px;
+      height: 300px;
+    }
+
+    #container div {
+      background-color: #e866ef;
+      width: 100px;
+      height: 50px; 
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <div>Flex Item</div>
+    <div>Flex Item</div>
+    <div>Flex Item</div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,16 @@
+flex是flexible Box的缩写,意为"弹性布局",采用flex布局的元素,称为Flex容器(container),它的所有子元素自动成为容器成员,称为Flex项目(item)
+通过给父容器添加flex属性,来控制子元素的位置和排列方式
+
+
+flex布局相关CSS样式:
+  1.display:模式
+      display: flex 使用flex布局
+  2.flex-direction:设置主轴
+      flex-direction: row(默认值) 主轴方向为x轴,水平向右(横向布局)
+      flex-direction: column 主轴方向为y轴,垂直向下(纵向布局)
+  3.justify-content:设置子元素在主轴上的对齐方式
+      justify-content: flex-start(默认值) 从头开始排列
+      justify-content: flex-end 从尾部开始排列
+      justify-content: center 在主轴居中对齐
+      justify-content: space-around 平分剩余空间
+      justify-content: space-between 先两边贴边,再平分剩余空间
