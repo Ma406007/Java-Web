@@ -1,0 +1,56 @@
+Vue是一款用于构建用户界面的渐进式的JavaScript框架
+  1.构建用户界面是指在Vue中,可以基于前端的原始数据渲染出用户看到的界面
+  Vue生态中的语法是非常多的,如声明式渲染,组件系统,客户端路由(VueRouter),状态管理(Vuex,Pinia),构建工具(Webpack,Vite)等
+  2.渐进式指的是不需要把所有的组件,语法全部学习完毕才能使用Vue,而是学一点就可以用一点
+    Vue两种常见的开发模式:
+    - 基于Vue提供的核心包完成项目局部模块的改造
+    - 基于Vue提供的核心包和插件进行工程化开发,也就是整站开发
+  3.框架就是一套完整的解决方案,用于快速构建项目
+    优点:大大提升前端项目的开发效率
+    缺点:需要理解和记忆框架的使用规则(参照官网https://cn.vuejs.org/)
+
+
+Vue指令指的是HTML标签上带有v-前缀的特殊属性,不同指令具有不同含义,可以实现不同的功能
+形式:<p v-xxx="...">...</p>
+常见指令:
+  1.v-for
+    作用:列表渲染,遍历容器的元素或者对象的属性
+    语法:<tr v-for="(item,index) in items" :key="item.id">{{item}}</tr>
+    参数:
+      items为遍历的数组
+      item为遍历出来的元素
+      index为索引/下标,从0开始;可以省略,省略index后的语法:v-for = "item in items"
+      key:
+        作用:给元素添加唯一的标识,便于Vue进行列表项的正确排序复用,提升渲染性能
+        推荐使用id作为key(唯一),不推荐使用index,因为index可能会重复,导致渲染性能降低
+    注意:遍历的数组必须在data中定义;要想让哪个标签循环展示多次,就在哪个标签上使用v-for指令
+
+  2.v-bind
+    作用:为HTML标签绑定属性值,如设置href,src,style,CSS样式等
+    语法:v-bind:属性名="属性值"(简写为:属性名="属性值") <img v-bind:src="item.image" width="30px">(<img :src="item.image" width="30px">)
+    注意:v-bind所绑定的数据必须在data中定义或基于data定义的数据
+
+  3.v-if/v-else-if/v-else
+    作用:条件渲染,根据条件显示或隐藏元素,true渲染,false不渲染
+    语法:v-if="表达式" v-else-if="表达式" v-else="表达式",表达式值为true渲染,为false不渲染
+    原理:基于条件判断,来控制创建或移除元素节点(条件成立时才会渲染)
+    场景:要么显示,要么不显示,不频繁切换的场景
+    其他:可以配合v-else-if/v-else使用,但v-else必须紧跟在v-if或v-else-if后面,v-else-if必须紧跟在v-if后面,可以出现多个
+
+  4.v-show
+    作用:根据条件显示或隐藏元素,区别在于切换的是display属性的值(相比于v-if,v-show总是会进行渲染)
+    语法:v-show="表达式"
+    原理:基于CSS样式display来控制显示与隐藏
+    场景:频繁切换显示隐藏的场景
+
+  5.v-model
+    作用:用于表单数据的双向绑定,如input,textarea,select等
+    语法:v-model="变量名"
+    这里的双向数据绑定指的是Vue中的数据变化会影响图中的数据展示,视图中的输入的数据变化也会影响Vue的数据模型
+    注意:v-model所绑定的数据必须在data中定义或基于data定义的数据
+
+  6.v-on
+    作用:为HTML标签绑定事件监听,如click,mouseover等
+    语法:v-on:事件名="方法名"(简写为@事件名="方法名") <input type="button" value="按钮" v-on:click="handle">(<input type="button" value="按钮" @click="handle">)
+    这里的handle是一个方法名,该方法名必须定义在methods中,方法名可以随意定义,但方法名必须和v-on:click="方法名"中的方法名保持一致
+    注意:methods函数中的this指向Vue实例,可以通过this获取data中定义的数据

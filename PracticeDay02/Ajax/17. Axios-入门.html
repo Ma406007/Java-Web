@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajax-Axios</title>
+</head>
+<body>
+    
+    <input type="button" value="获取数据GET" id="btnGet">
+    <input type="button" value="操作数据POST" id="btnPost">
+
+    <script src="E:\JavaCode\Java-Web-practice\PracticeDay02\js\axios.js"></script> <!-- 引入Axios的js文件(参照官网) -->
+    <script>
+        //发送GET请求
+        document.querySelector('#btnGet').addEventListener('click', () => {
+            //axios发起异步请求
+            axios({
+                //在使用axios时,在axios之后输入thenc会自动生成成功及失败回调函数结构
+                url: 'https://mock.apifox.cn/m1/3083103-0-default/emps/list', //请求路径
+                method: 'GET' //请求方式:GET/POST
+            }).then((result) => { //成功回调函数
+                console.log(result.data);
+            }).catch((err) => { //失败回调函数
+                console.log(err);
+            })
+        })
+        
+        //发送POST请求
+        document.querySelector('#btnPost').addEventListener('click', () => {
+            //axios发起异步请求
+            axios({
+                //在使用axios时,在axios之后输入thenc会自动生成成功及失败回调函数结构
+                url: 'https://mock.apifox.cn/m1/3083103-0-default/emps/update', //请求路径
+                method: 'POST',//请求方式:GET/POST
+                data: 'id=1' //POST请求方式 , 请求体
+            }).then((result) => { //成功回调函数
+                console.log(result.data);
+            }).catch((err) => { //失败回调函数
+                console.log(err);
+            })
+        })
+    </script>
+</body>
+</html>

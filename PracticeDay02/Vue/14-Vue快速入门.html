@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vue-快速入门</title>
+</head>
+<body>
+  <div id="app"> <!-- 3.准备元素,被Vue控制 -->
+    <h1>{{message}}</h1> <!-- 5.通过插值表达式渲染数据 -->
+    <h1>{{count}}</h1>
+  </div>
+  
+  <script type="module">
+    import { createApp } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'; //1.引入Vue模块(官方提供)
+    createApp({ //2.创建Vue程序的应用实例来控制视图的元素
+      data(){ //4.准备数据
+        return {
+          message: 'Hello Vue',
+          count: 100
+        }
+      }
+    }).mount('#app')//要接管的元素
+  </script>
+</body>
+</html>
+
+<!-- 注意:
+1.Vue中定义数据必须通过data方法来定义,data方法返回值是一个对象,在这个对象中定义数据
+2.插值表达式中编写的变量一定是Vue中定义的数据,如果插值表达式中编写了一个变量但是在Vue中未定义,将会报错
+3.Vue应用实例接管的区域是'#app',超出这个范围就不受Vue控制了,所以Vue的插值表达式,一定要写在<div id="app">...</div>的里面 -->
