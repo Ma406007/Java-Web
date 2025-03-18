@@ -1,0 +1,32 @@
+Spring家族旗下这么多的技术,其中最基础,最核心的是SpringFramework
+SpringFramework是一个功能强大的Java应用程序框架,旨在提供高效且可扩展的开发环境
+它结合了轻量级的容器和依赖注入功能提供了一种使用POJO进行容器配置和面向切面的编程的简单方法,以及一组用于AOP的模块
+Spring框架还支持各种移动应用开发技术,如Android和iOS
+此外还提供了对事务管理,对象/关系映射,JavaBeans,JDBC,JMS和其他技术的支持,从而确保高效开发
+而如果我们在项目中直接基于SpringFramework进行开发会存在两个问题:
+  1.配置繁琐
+  2.入门难度大
+
+
+Spring官方推荐我们从另外一个项目开始学习,那就是目前最火爆的SpringBoot
+SpringBoot是由Pivotal团队提供的一套开源框架,可以简化spring应用的创建及部署
+它提供了丰富的Spring模块化支持,可以帮助开发者更轻松快捷地构建出企业级应用
+SpringBoot通过自动配置功能,降低了复杂性,同时支持基于JVM的多种开源框架,可以缩短开发时间,使开发更加简单和高效
+SpringBoot最大的两个特点:
+  1.简化配置
+  2.快速开发
+
+SpringBoot可以帮助我们非常快速的构建应用程序,简化开发,提高效率
+而直接基于SpringBoot进行项目构建和开发不仅是Spring官方推荐的方式,也是现在企业开发的主流
+
+
+有时会因为网络问题无法访问Spring官方网站从而无法创建Spring的项目,这时可以使用阿里云提供的镜像网站,网址为:https://start.aliyun.com(Spring版本会相对官网落后)
+
+
+起步依赖:
+一种为开发者提供简化配置和集成的机制,使得构建Spring应用程序更加轻松
+起步依赖本质上是一组预定义的依赖项集合,它们一起提供了在特定场景下开发Spring应用所需的所有库和配置
+  1.spring-boot-starter-web:包含了web应用开发所需要的常见依赖
+  2.spring-boot-starter-test:包含了单元测试所需要的常见依赖
+
+

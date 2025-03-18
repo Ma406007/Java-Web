@@ -1,0 +1,92 @@
+三层架构:
+在我们进行程序设计以及程序开发时,应尽可能让每一个接口,类和方法的职责更单一些(单一职责原则)
+单一职责原则:一个类或一个方法,就只做一件事情,只管一块功能
+这样就可以让类,接口和方法的复杂度更低,可读性更强,扩展性更好,也更利于后期的维护
+
+在UserController中从组成上看可以分为三个部分:
+  1.数据访问:负责业务数据的维护操作,包括增删改查等操作
+  2.逻辑处理:负责业务逻辑处理的代码
+  3.请求处理,响应数据:负责接收页面的请求,给页面响应数据
+可分别对应以下三层:
+  1.Dao:数据访问层(Data Access Object),也称为持久层,负责数据访问操作,包括数据的增删改查
+  2.Service:业务逻辑层,处理具体的业务逻辑
+  3.Controller:控制层,接收前端发送的请求,然后对请求进行处理并响应数据
+基于三层架构的程序执行流程:
+  1.前端发起的请求由Controller层接收(Controller响应数据给前端)
+  2.Controller层调用Service层来进行逻辑处理(Service层处理完后,把处理结果返回给Controller层)
+  3.Service层调用Dao层(逻辑处理过程中需要用到的一些数据要从Dao层获取)
+  4.Dao层操作文件中的数据(Dao拿到的数据会返回给Service层)
+三层架构的好处：
+  1.复用性强
+  2.便于维护
+  3.利用扩展
+
+
+分层解耦:
+  内聚:软件中各个功能模块内部的功能联系
+  耦合:衡量软件中各个层/模块之间的依赖和关联的程度
+  软件设计原则:高内聚低耦合(目的:使程序模块的复用性和移植性大大增强)
+    高内聚:指的是一个模块中各个元素之间的联系的紧密程度,如果各个元素(语句和程序段)之间的联系程度越高,则内聚性越高,即"高内聚"
+    低耦合:指的是软件中各个层和模块之间的依赖关联程序越低越好
+
+  解耦思路:
+    1.首先不能在Controller中使用new对象
+    2.将要用到的对象交给一个容器管理
+    3.应用程序中用到这个对象,就直接从容器中获取
+  上述思路涉及Spring中的两个重要概念:
+    1.控制反转:Inversion Of Control(简称IOC),对象的创建控制权由程序自身转移到外部(容器),这种思想称为控制反转
+        对象的创建权由程序员主动创建转移到容器(由容器创建,并管理对象),这个容器称为IOC容器或Spring容器
+
+    2.依赖注入:Dependency Injection(简称DI),容器为应用程序提供运行时所依赖的资源,称之为依赖注入
+        程序运行时需要某个资源,此时容器就为其提供这个资源
+        例:Controller程序运行时需要Service对象,Spring容器就为其提供并注入Service对象
+
+
+Bean的声明:
+前面我们提到IOC控制反转就是将对象的控制权交给Spring的IOC容器,由IOC容器创建及管理对象.IOC容器创建的对象称为bean对象
+在之前的入门案例中要把某个对象交给IOC容器管理,需要在类上添加一个注解:@Component
+而Spring框架为了更好的标识web应用程序开发当中,bean对象到底归属于哪一层,又提供了@Component的衍生注解:
+  1.@Component:声明bean的基础注解 不属于以下三类时,用此注解
+  2.@Controller:@Component的衍生注解,标注在控制层类上
+  3.@Service:@Component的衍生注解,标注在业务层类上
+  4.@Repository:@Component的衍生注解,标注在数据访问层类上(由于mybatis整合,使用的比较少)
+注意:
+  1.声明bean的时候可以通过注解的value属性指定bean的名字,如果没有指定,默认为类名首字母小写
+  2.使用以上四个注解都可以声明bean,但是在springboot集成web开发中,声明控制器bean只能用@Controller
+
+思考:被以上四个注解声明的bean类一定会生效吗? 答:不一定,bean类生效需要满足两个条件:1.被声明的bean类所在的包必须在组件扫描的路径下 2.被声明的bean类必须在spring容器中创建
+  - 前面声明bean的四大注解要想生效,还需要被组件扫描注解@ComponentScan扫描
+  - 该注解虽然没有显式配置,但是实际上已经包含在了启动类声明注解@SpringBootApplication中,默认扫描的范围是启动类所在包及其子包
+解决方法:在项目开发中将项目中的所有的业务类,都放在启动类所在包的子包中就无需考虑组件扫描问题
+
+
+如果在IOC容器中存在多个相同类型的bean对象,假设Service这个类型的bean存在两个,框架不知道具体要注入哪个bean使用,就会报错
+Spring提供了以下几种解决方案:
+  1.@Primary
+    - 当存在多个相同类型的Bean注入时,加上@Primary注解来确定默认的实现
+    @Primary
+    @Service
+    public class UserServiceImpl implements UserService {
+    }
+  2.@Qualifier
+    - 指定当前要注入的bean对象
+    - 在@Qualifier的value属性中指定注入的bean的名称
+    - @Qualifier注解不能单独使用,必须配合@Autowired使用
+    @RestController
+    public class UserController {
+        @Qualifier("userServiceImpl")
+        @Autowired
+        private UserService userService;
+    }
+  3.@Resource
+    - 按照bean的名称进行注入
+    - 通过name属性指定要注入的bean的名称
+    @RestController
+    public class UserController {
+        @Resource(name = "userServiceImpl")
+        private UserService userService;
+    }
+
+面试题:@Autowired与@Resource的区别
+  - @Autowired是spring框架提供的注解,而@Resource是JDK提供的注解
+  - @Autowired默认是按照类型注入,而@Resource是按照名称注入
