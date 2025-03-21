@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- XML映射文件的namespace属性为Mapper接口全限定名 -->
+<mapper namespace="org.example.mapper.UserMapper">
+    <!-- 查询操作 -->
+    <!-- 运行时记得要将原来的注解备注掉 -->
+    <select id="selectAll" resultType="org.example.pojo.User"> <!-- resultType属性的值与查询返回的单条记录封装的类型一致 -->
+        <!--  XML映射文件中sql语句的id与Mapper接口中的方法名一致，并保持返回类型一致 -->
+        select * from user
+    </select>
+</mapper>
