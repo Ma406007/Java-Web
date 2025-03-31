@@ -1,0 +1,36 @@
+spring:
+  application:
+    name: Tlias-web-management
+  datasource:
+    url: jdbc:mysql://localhost:3306/Tlias
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 123456
+
+mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    #数据封装方式三:开启驼峰命名(推荐)
+    map-underscore-to-camel-case: true
+
+#spring事务管理日志
+logging:
+  level:
+    org.springframework.jdbc.support.JdbcTransactionManager: debug
+
+#在SpringBoot中文件上传时默认单个文件最大大小为1M
+#那么如果需要上传大文件可以在application.yml进行如下配置
+spring:
+  servlet:
+    multipart:
+      #单个文件的最大大小
+      max-file-size: 10MB
+      #最大请求大小
+      max-request-size: 100MB
+
+#阿里云OSS
+aliyun:
+  oss:
+    endpoint: https://oss-cn-beijing.aliyuncs.com
+    bucketName: java-ai
+    region: cn-beijing
